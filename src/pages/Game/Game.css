@@ -30,13 +30,11 @@
   visibility: hidden;
 }
 
-header {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.heading {
-  font-size: 3em;
+.cont-box {
+  width: 450px;
+  height: 450px;
+  position: relative;
+  margin: 5rem auto;
 }
 
 .tile-container {
@@ -49,9 +47,26 @@ header {
   background: #000;
   padding: 2rem;
   width: 440px;
-  margin: 5rem auto;
 }
 
+.tile-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1rem solid #000;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+.tile_logo-img {
+  width: 90px;
+  height: auto;
+}
 .unclickable {
   pointer-events: none;
 }

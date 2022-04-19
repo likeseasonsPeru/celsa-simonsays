@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import LogoCelsa from "../../assets/img/logo-celsa-form.png";
 import "./Game.css";
 
 export const Game = () => {
@@ -127,15 +128,20 @@ export const Game = () => {
           </h1>
         </div>
 
-        <section
-          className="tile-container js-container unclickable"
-          onClick={TileContainer}
-        >
-          <div className="tile tile-red" data-tile="red"></div>
-          <div className="tile tile-green" data-tile="green"></div>
-          <div className="tile tile-blue" data-tile="blue"></div>
-          <div className="tile tile-yellow" data-tile="yellow"></div>
-        </section>
+        <div className="cont-box">
+          <section
+            className="tile-container js-container unclickable"
+            onClick={TileContainer}
+          >
+            <div className="tile tile-red" data-tile="red"></div>
+            <div className="tile tile-green" data-tile="green"></div>
+            <div className="tile tile-blue" data-tile="blue"></div>
+            <div className="tile tile-yellow" data-tile="yellow"></div>
+          </section>
+          <div className="tile-logo">
+            <img className="tile_logo-img" src={LogoCelsa} alt="Logo Celsa" />
+          </div>
+        </div>
 
         <footer className="info-section">
           <button className="start-button js-start" onClick={StartBtn}>
