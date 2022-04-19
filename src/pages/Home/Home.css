@@ -1,0 +1,31 @@
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.container_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.container_box-img {
+  width: 100%;
+  height: auto;
+  background-color: antiquewhite;
+  margin-bottom: 7rem;
+}
+.container_box-btn {
+  border: none;
+  background-color: #ff0000;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 45vw;
+  max-width: 20rem;
+  height: 4rem;
+  color: #fff;
+}

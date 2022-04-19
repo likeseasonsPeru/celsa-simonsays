@@ -1,0 +1,170 @@
+.game {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+.game_head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 3rem;
+}
+.game_head > h1 {
+  background-color: #ff0000;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.4rem 0.9rem;
+  border-radius: 25px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.invisble {
+  visibility: hidden;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.heading {
+  font-size: 3em;
+}
+
+.tile-container {
+  display: grid;
+  grid-template-rows: 180px 180px;
+  grid-template-columns: 180px 180px;
+  grid-gap: 20px;
+  position: relative;
+  border-radius: 50%;
+  background: #000;
+  padding: 2rem;
+  width: 440px;
+  margin: 5rem auto;
+}
+
+.unclickable {
+  pointer-events: none;
+}
+
+.tile-red {
+  background-color: #f25022;
+
+  transition: 0.15s;
+  border-radius: 100% 0 0 0;
+}
+
+.tile-red:hover,
+.tile-red:focus {
+  background-color: #ff451a;
+}
+
+.tile-red:active,
+.tile-red.activated {
+  background-color: #ff5c36;
+  transform: translateY(10px);
+}
+
+.tile-green {
+  background-color: #7fba00;
+  transition: 0.15s;
+  border-radius: 0 100% 0 0;
+}
+
+.tile-green:hover,
+.tile-green:focus {
+  background-color: #8cc218;
+}
+
+.tile-green:active,
+.tile-green.activated {
+  background-color: #a0ea00;
+  transform: translateY(10px);
+}
+
+.tile-yellow {
+  background-color: #ffb900;
+  transition: 0.15s;
+  border-radius: 0 0 100% 0;
+}
+
+.tile-yellow:hover,
+.tile-yellow:focus {
+  background-color: #ffb900;
+}
+
+.tile-yellow:active,
+.tile-yellow.activated {
+  background-color: #ffca3d;
+  transform: translateY(10px);
+}
+
+.tile-blue {
+  background-color: #00a4ef;
+  transition: 0.15s;
+  border-radius: 0 0 0 100%;
+}
+
+.tile-blue:hover,
+.tile-blue:focus {
+  background-color: #139ddd;
+}
+
+.tile-blue:active,
+.tile-blue.activated {
+  background-color: #2bbcff;
+  transform: translateY(10px);
+}
+
+.info-section {
+  text-align: center;
+}
+
+.start-button {
+  border: none;
+  background-color: #ff0000;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 45vw;
+  max-width: 20rem;
+  height: 4rem;
+  color: #fff;
+}
+
+.start-button:hover {
+  background-color: #cd3434;
+}
+
+.info {
+  font-size: 22px;
+}
+
+@media screen and (max-width: 550px) {
+  .game {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .heading {
+    font-size: 2em;
+  }
+
+  .tile-container {
+    width: 100%;
+    height: 100%;
+    grid-template-rows: 150px 150px;
+    grid-template-columns: 150px 150px;
+  }
+}
