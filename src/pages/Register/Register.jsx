@@ -30,6 +30,8 @@ export const Register = () => {
       }, 1000);
       return;
     }
+    // localStorage.setItem("userCelsa", JSON.stringify(user));
+    // history.push("/game");
     setBtnRef(true);
     try {
       const resp = await axios.get(
