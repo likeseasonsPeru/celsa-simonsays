@@ -108,11 +108,11 @@ export const Register = () => {
               Complete los campos correctamente
             </p>
           )}
-          {btnRef && (
+          {/* {btnRef && (
             <div className="loading">
               <div></div>
             </div>
-          )}
+          )} */}
           <button className="containerReg_box-form-btn">!jugar! </button>
         </form>
       </div>
