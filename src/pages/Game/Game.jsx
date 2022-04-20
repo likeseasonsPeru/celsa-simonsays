@@ -1,12 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import LogoCelsa from "../../assets/img/logo-celsa-form.png";
 import Swal from "sweetalert2";
 import emoji from "../../assets/img/emoji.png";
 import "./Game.css";
+import axios from "axios";
 
 export const Game = () => {
   const history = useHistory();
+  // const [user, setUser] = useState();
   const [sequence, setSequence] = useState([]);
   const [humanSequence, setHumanSequence] = useState([]);
   const [level, setLevel] = useState(0);
@@ -136,6 +138,26 @@ export const Game = () => {
     const { tile } = e.target.dataset;
     if (tile) handleClick(tile);
   };
+
+  const sendUser = async (usr) => {
+    try {
+      await axios.get(
+        "https://likeseasons.com/clientes/celsa/api-registro/index.php",
+        { params: usr }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const localUser = localStorage.getItem("userCelsa");
+    if (localUser) {
+      const lclUsr = JSON.parse(localUser);
+      sendUser(lclUsr);
+      console.log("userCelsa");
+    }
+  }, []);
   return (
     <>
       <main className="game">

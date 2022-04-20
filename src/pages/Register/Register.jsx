@@ -3,7 +3,7 @@ import "./Register.css";
 import IMG from "../../assets/img/logo-celsa-form.png";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-// import axios from "axios";
+import { useEffect } from "react";
 
 export const Register = () => {
   const history = useHistory();
@@ -15,8 +15,7 @@ export const Register = () => {
     email: "",
     job: "",
   });
-  // const [btnRef, setBtnRef] = useState(false);
-
+  const [btnRef, setBtnRef] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleForm = async (e) => {
@@ -30,23 +29,31 @@ export const Register = () => {
       }, 1000);
       return;
     }
-    localStorage.setItem("userCelsa", JSON.stringify(user));
-    history.push("/game");
-    // setBtnRef(true);
-    // try {
-    //   const resp = await axios.get(
-    //     "https://likeseasons.com/clientes/celsa/api-registro/index.php",
-    //     { params: user }
-    //   );
-    //   console.log(resp);
-    //   localStorage.setItem("userCelsa", JSON.stringify(user));
-    //   history.push("/game");
-    //   setBtnRef(false);
-    // } catch (error) {
-    //   console.log(error);
-    //   setBtnRef(false);
-    // }
+    setBtnRef(true);
+    const users = JSON.parse(localStorage.getItem("usersCelsa"));
+    const totalUsrs = [...users, user];
+    localStorage.setItem("usersCelsa", JSON.stringify(totalUsrs));
+    setTimeout(() => {
+      localStorage.setItem("userCelsa", JSON.stringify(user));
+      history.push("/game");
+      setBtnRef(false);
+    }, 500);
   };
+  useEffect(() => {
+    const useProve = [
+      {
+        cellphone: "+1 (798) 311-6568",
+        email: "gehejud@mailinator.com",
+        firstname: "Jada Bullock",
+        job: "Proident excepturi ",
+        lastname: "York",
+      },
+    ];
+    const lclUsr = localStorage.getItem("usersCelsa");
+    if (!lclUsr) {
+      localStorage.setItem("usersCelsa", JSON.stringify(useProve));
+    }
+  }, []);
 
   return (
     <div className="containerReg">
@@ -108,12 +115,14 @@ export const Register = () => {
               Complete los campos correctamente
             </p>
           )}
-          {/* {btnRef && (
+          {btnRef && (
             <div className="loading">
               <div></div>
             </div>
-          )} */}
-          <button className="containerReg_box-form-btn">!jugar! </button>
+          )}
+          <button disabled={btnRef} className="containerReg_box-form-btn">
+            !jugar!{" "}
+          </button>
         </form>
       </div>
     </div>
