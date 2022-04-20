@@ -117,7 +117,7 @@ export const Game = () => {
       return;
     }
 
-    info.current.textContent = `Tu turno${remainingTaps} Tap${
+    info.current.textContent = `Tu turno ${remainingTaps} Tap${
       remainingTaps > 1 ? "s" : ""
     }`;
   }
