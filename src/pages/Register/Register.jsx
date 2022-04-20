@@ -3,7 +3,7 @@ import "./Register.css";
 import IMG from "../../assets/img/logo-celsa-form.png";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-// import axios from "axios";
+import axios from "axios";
 
 export const Register = () => {
   const history = useHistory();
@@ -29,19 +29,17 @@ export const Register = () => {
       }, 1000);
       return;
     }
-    // try {
-    //   const resp = await axios.get(
-    //     "https://likeseasons.com/clientes/celsa/api-registro/index.php",
-    //     { params: user }
-    //   );
-    //   console.log(resp);
-    //   localStorage.setItem("userCelsa", JSON.stringify(user));
-    //   // history.push("/game");
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    localStorage.setItem("userCelsa", JSON.stringify(user));
-    history.push("/game");
+    try {
+      const resp = await axios.get(
+        "https://likeseasons.com/clientes/celsa/api-registro/index.php",
+        { params: user }
+      );
+      console.log(resp);
+      localStorage.setItem("userCelsa", JSON.stringify(user));
+      history.push("/game");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
