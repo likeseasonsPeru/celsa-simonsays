@@ -15,7 +15,7 @@ export const Register = () => {
     email: "",
     job: "",
   });
-  const [btnRef, setBtnRef] = useState(false);
+  // const [btnRef, setBtnRef] = useState(false);
 
   const [show, setShow] = useState(false);
 
@@ -113,9 +113,7 @@ export const Register = () => {
               <div></div>
             </div>
           )}
-          <button disabled={btnRef} className="containerReg_box-form-btn">
-            !jugar!{" "}
-          </button>
+          <button className="containerReg_box-form-btn">!jugar! </button>
         </form>
       </div>
     </div>
