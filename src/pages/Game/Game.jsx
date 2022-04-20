@@ -1,32 +1,33 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import LogoCelsa from "../../assets/img/logo-celsa-form.png";
 import "./Game.css";
 
 export const Game = () => {
-  let sequence = [];
-  let humanSequence = [];
-  let level = 0;
-  const infoRef = useRef();
-  const headingRef = useRef();
-  const startButton = document.querySelector(".js-start");
-  const info = document.querySelector(".js-info");
-  const heading = document.querySelector(".js-heading");
-  const tileContainer = document.querySelector(".js-container");
+  const history = useHistory();
+  const [sequence, setSequence] = useState([]);
+  const [humanSequence, setHumanSequence] = useState([]);
+  const [level, setLevel] = useState(0);
+  const startButton = useRef();
+  const info = useRef();
+  const heading = useRef();
+  const tileContainer = useRef();
 
   function resetGame(text) {
     alert(text);
-    sequence = [];
-    humanSequence = [];
-    level = 0;
-    startButton.classList.remove("hidden");
-    heading.textContent = "Simon Game";
-    info.classList.add("hidden");
-    tileContainer.classList.add("unclickable");
+    setSequence([]);
+    setHumanSequence([]);
+    setLevel(0);
+    startButton.current.classList.remove("hidden");
+    heading.current.textContent = "Simon Game";
+    info.current.classList.add("hidden");
+    tileContainer.current.classList.add("unclickable");
+    history.push("/");
   }
 
-  function humanTurn(level) {
-    tileContainer.classList.remove("unclickable");
-    info.textContent = `Your turn: ${level} Tap${level > 1 ? "s" : ""}`;
+  function humanTurn(lvl) {
+    tileContainer.current.classList.remove("unclickable");
+    info.current.textContent = `Tu turno: ${lvl} Tap${lvl > 1 ? "s" : ""}`;
   }
 
   function activateTile(color) {
@@ -57,17 +58,18 @@ export const Game = () => {
   }
 
   function nextRound() {
-    level += 1;
+    setLevel((level) => level + 1);
 
-    tileContainer.classList.add("unclickable");
-    info.textContent = "Wait for the computer";
-    heading.textContent = `Level ${level} of 30`;
+    tileContainer.current.classList.add("unclickable");
+    info.current.textContent = "Espere...";
+    heading.current.textContent = `Level ${level} de 30`;
 
     const nextSequence = [...sequence];
     nextSequence.push(nextStep());
     playRound(nextSequence);
 
-    sequence = [...nextSequence];
+    // sequence = [...nextSequence]
+    setSequence([...nextSequence]);
     setTimeout(() => {
       humanTurn(level);
     }, level * 600 + 1000);
@@ -81,31 +83,35 @@ export const Game = () => {
     const remainingTaps = sequence.length - humanSequence.length;
 
     if (humanSequence[index] !== sequence[index]) {
-      return resetGame("Oops! Game over, you pressed the wrong tile.");
+      return resetGame(
+        "¡Ups! Se acabó el juego, presionaste el botón equivocado."
+      );
     }
 
     if (humanSequence.length === sequence.length) {
       if (humanSequence.length === 30) {
-        return resetGame("Congrats, You Legend! You completed all the levels");
+        return resetGame(
+          "¡Felicidades, Leyenda! Has completado todos los niveles."
+        );
       }
 
-      humanSequence = [];
-      info.textContent = "Correcto! Espera el siguiente!";
+      setHumanSequence([]);
+      info.current.textContent = "Correcto! Espera el siguiente!";
       setTimeout(() => {
         nextRound();
       }, 1000);
       return;
     }
 
-    info.textContent = `Tu turno${remainingTaps} Tap${
+    info.current.textContent = `Tu turno${remainingTaps} Tap${
       remainingTaps > 1 ? "s" : ""
     }`;
   }
 
   function startGame() {
-    startButton.classList.add("hidden");
-    info.classList.remove("hidden");
-    tileContainer.classList.remove("unclickable");
+    startButton.current.classList.add("hidden");
+    info.current.classList.remove("hidden");
+    tileContainer.current.classList.remove("unclickable");
     nextRound();
   }
 
@@ -120,16 +126,15 @@ export const Game = () => {
     <>
       <main className="game">
         <div className="game_head">
-          <h1 ref={headingRef} className="heading js-heading">
+          <h1 ref={heading} className="heading js-heading">
             Niveles: 30
           </h1>
-          <h1 ref={headingRef} className="heading js-heading">
-            Resultado: {0}
-          </h1>
+          <h1 className="heading js-heading">Resultado: {level}</h1>
         </div>
 
         <div className="cont-box">
           <section
+            ref={tileContainer}
             className="tile-container js-container unclickable"
             onClick={TileContainer}
           >
@@ -144,10 +149,14 @@ export const Game = () => {
         </div>
 
         <footer className="info-section">
-          <button className="start-button js-start" onClick={StartBtn}>
+          <button
+            ref={startButton}
+            className="start-button js-start"
+            onClick={StartBtn}
+          >
             Empezar
           </button>
-          <span ref={infoRef} className="info js-info hidden"></span>
+          <span ref={info} className="info js-info hidden"></span>
         </footer>
       </main>
 
