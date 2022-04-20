@@ -3,7 +3,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
+  width: 700px;
+  max-height: 900px;
 }
 .game_head {
   display: flex;
@@ -164,7 +165,23 @@
 .info {
   font-size: 22px;
 }
-
+.swal2-container.swal2-center > .swal2-popup {
+  border-radius: 50px;
+}
+.swal2-styled.swal2-cancel {
+  border-radius: 30px;
+  font-family: "Poppins";
+}
+.swal2-title {
+  color: #000;
+  font-size: 50px;
+}
+.swal2-html-container {
+  color: #000;
+  padding-top: none;
+  margin-top: 0;
+  font-size: 1.5rem;
+}
 @media screen and (max-width: 550px) {
   .game {
     width: 100%;

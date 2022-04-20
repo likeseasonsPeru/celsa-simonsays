@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import LogoCelsa from "../../assets/img/logo-celsa-form.png";
+import Swal from "sweetalert2";
+import emoji from "../../assets/img/emoji.png";
 import "./Game.css";
 
 export const Game = () => {
@@ -14,7 +16,19 @@ export const Game = () => {
   const tileContainer = useRef();
 
   function resetGame(text) {
-    alert(text);
+    console.log(text);
+    Swal.fire({
+      icon: false,
+      imageUrl: emoji,
+      title: "!FELICIDADES!",
+      text: `Tu puntuación más alta fue ${level}`,
+      showConfirmButton: false,
+      showCancelButton: true,
+      cancelButtonColor: "#ff0000",
+      cancelButtonText: "VOLVER A JUGAR",
+    }).then(() => {
+      history.push("/");
+    });
     setSequence([]);
     setHumanSequence([]);
     setLevel(0);
@@ -22,7 +36,7 @@ export const Game = () => {
     heading.current.textContent = "Simon Game";
     info.current.classList.add("hidden");
     tileContainer.current.classList.add("unclickable");
-    history.push("/");
+    // history.push("/");
   }
 
   function humanTurn(lvl) {

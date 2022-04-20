@@ -3,21 +3,22 @@ import "./Register.css";
 import IMG from "../../assets/img/logo-celsa-form.png";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+// import axios from "axios";
 
 export const Register = () => {
   const history = useHistory();
 
   const [user, setUser] = useState({
-    name: "",
+    firstname: "",
     lastname: "",
-    email: "",
     cellphone: "",
-    career: "",
+    email: "",
+    job: "",
   });
 
   const [show, setShow] = useState(false);
 
-  const handleForm = (e) => {
+  const handleForm = async (e) => {
     e.preventDefault();
     const v = Object.values(user);
     const validation = v.filter((v) => v === "");
@@ -28,6 +29,17 @@ export const Register = () => {
       }, 1000);
       return;
     }
+    // try {
+    //   const resp = await axios.get(
+    //     "https://likeseasons.com/clientes/celsa/api-registro/index.php",
+    //     { params: user }
+    //   );
+    //   console.log(resp);
+    //   localStorage.setItem("userCelsa", JSON.stringify(user));
+    //   // history.push("/game");
+    // } catch (error) {
+    //   console.log(error);
+    // }
     localStorage.setItem("userCelsa", JSON.stringify(user));
     history.push("/game");
   };
@@ -44,8 +56,8 @@ export const Register = () => {
             type="text"
             className="containerReg_box-form-input"
             id="name"
-            value={user.name}
-            onChange={(v) => setUser({ ...user, name: v.target.value })}
+            value={user.firstname}
+            onChange={(v) => setUser({ ...user, firstname: v.target.value })}
           />
           <label className="containerReg_box-form-label" htmlFor="Name">
             Apellidos:
@@ -84,8 +96,8 @@ export const Register = () => {
             type="text"
             className="containerReg_box-form-input"
             id="career"
-            value={user.career}
-            onChange={(v) => setUser({ ...user, career: v.target.value })}
+            value={user.job}
+            onChange={(v) => setUser({ ...user, job: v.target.value })}
           />
           {show && (
             <p className="containerReg_box-form-errMessage">
