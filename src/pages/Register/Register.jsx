@@ -15,6 +15,7 @@ export const Register = () => {
     email: "",
     job: "",
   });
+  const [btnRef, setBtnRef] = useState(false);
 
   const [show, setShow] = useState(false);
 
@@ -29,6 +30,7 @@ export const Register = () => {
       }, 1000);
       return;
     }
+    setBtnRef(true);
     try {
       const resp = await axios.get(
         "https://likeseasons.com/clientes/celsa/api-registro/index.php",
@@ -37,8 +39,10 @@ export const Register = () => {
       console.log(resp);
       localStorage.setItem("userCelsa", JSON.stringify(user));
       history.push("/game");
+      setBtnRef(false);
     } catch (error) {
       console.log(error);
+      setBtnRef(false);
     }
   };
 
@@ -102,7 +106,14 @@ export const Register = () => {
               Complete los campos correctamente
             </p>
           )}
-          <button className="containerReg_box-form-btn">!jugar! </button>
+          {btnRef && (
+            <div className="loading">
+              <div></div>
+            </div>
+          )}
+          <button disabled={btnRef} className="containerReg_box-form-btn">
+            !jugar!{" "}
+          </button>
         </form>
       </div>
     </div>
