@@ -8,7 +8,6 @@ import axios from "axios";
 
 export const Game = () => {
   const history = useHistory();
-  // const [user, setUser] = useState();
   const [sequence, setSequence] = useState([]);
   const [humanSequence, setHumanSequence] = useState([]);
   const [level, setLevel] = useState(0);
@@ -62,7 +61,6 @@ export const Game = () => {
     nextSequence.forEach((color, index) => {
       setTimeout(() => {
         activateTile(color);
-        console.log((index + 1) * 740);
       }, (index + 1) * 700);
     });
   }
@@ -85,14 +83,27 @@ export const Game = () => {
     nextSequence.push(nextStep());
     playRound(nextSequence);
 
-    // sequence = [...nextSequence]
     setSequence([...nextSequence]);
     setTimeout(() => {
       humanTurn(level);
-    }, level * 600 + 1000);
+    }, level * 700 + 1000);
   }
 
   function handleClick(tile) {
+    const sdn = document.querySelector(`[data-sound='${tile}']`);
+    const restart = () => {
+      sdn.pause();
+      sdn.currentTime = 0;
+    };
+    const playSdn = sdn.play();
+    const condition = humanSequence.length > 1 && playSdn;
+    const scdCondition =
+      humanSequence[humanSequence.length - 2] ===
+      humanSequence[humanSequence.length - 1];
+
+    if (condition || (condition && scdCondition)) {
+      restart();
+    }
     const index = humanSequence.push(tile) - 1;
     const sound = document.querySelector(`[data-sound='${tile}']`);
     sound.play();
@@ -156,7 +167,6 @@ export const Game = () => {
     if (localUser) {
       const lclUsr = JSON.parse(localUser);
       sendUser(lclUsr);
-      console.log("userCelsa");
     }
   }, []);
   return (
