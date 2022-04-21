@@ -47,22 +47,23 @@ export const Game = () => {
   }
 
   function activateTile(color) {
-    const tile = document.querySelector(`[data-tile='${color}']`);
     const sound = document.querySelector(`[data-sound='${color}']`);
+    const tile = document.querySelector(`[data-tile='${color}']`);
 
-    tile.classList.add("activated");
     sound.play();
+    tile.classList.add("activated");
 
     setTimeout(() => {
       tile.classList.remove("activated");
-    }, 300);
+    }, 524);
   }
 
   function playRound(nextSequence) {
     nextSequence.forEach((color, index) => {
       setTimeout(() => {
         activateTile(color);
-      }, (index + 1) * 600);
+        console.log((index + 1) * 740);
+      }, (index + 1) * 700);
     });
   }
 
@@ -197,18 +198,22 @@ export const Game = () => {
       </main>
 
       <div className="hidden">
+        {/* 0.41775 */}
         <audio
           src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"
           data-sound="red"
         ></audio>
+        {/* 0.418333 */}
         <audio
           src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"
           data-sound="green"
         ></audio>
+        {/* 0.5228 */}
         <audio
           src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"
           data-sound="blue"
         ></audio>
+        {/* 0.5235 */}
         <audio
           src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"
           data-sound="yellow"

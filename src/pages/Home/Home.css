@@ -18,6 +18,7 @@
 }
 .container_box-img {
   width: 100%;
+  max-width: 400px;
   height: auto;
   background-color: antiquewhite;
   margin-bottom: 7rem;
